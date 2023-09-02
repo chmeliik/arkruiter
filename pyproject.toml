@@ -1,0 +1,14 @@
+[project]
+name = "arkruiter"
+version = "0.1.0"
+description = "Arknights recruitment helper CLI."
+authors = [
+    {name = "Adam Cmiel", email = "acmiel1@gmail.com"},
+]
+dependencies = []
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.scripts]
+arkruiter = "arkruiter.main:main"

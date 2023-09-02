@@ -50,6 +50,10 @@ select = [
     "PL",   # pylint
     "RUF",  # ruff
 ]
+ignore = [
+    "ANN101",  # missing-type-self
+    "ANN102",  # missing-type-cls
+]
 
 [tool.ruff.isort]
 required-imports = ["from __future__ import annotations"]

@@ -16,3 +16,6 @@ autofix:
 
 test:
 	venv/bin/pytest
+
+unittest:
+	venv/bin/pytest -m 'not network'

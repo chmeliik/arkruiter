@@ -6,8 +6,12 @@ from typing import TYPE_CHECKING, Any, Literal, NamedTuple, Self
 
 import pydantic
 
+from arkruiter.requests import download_json
+
 if TYPE_CHECKING:
     from arkruiter.types import JsonData
+
+DEFAULT_URL = "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_US/gamedata/excel/character_table.json"
 
 Position = Literal["MELEE", "RANGED"]
 
@@ -46,3 +50,7 @@ class CharacterTable(NamedTuple):
             if character_data.get("itemObtainApproach") is not None
         ]
         return cls(characters)
+
+    @classmethod
+    def from_url(cls, url: str = DEFAULT_URL) -> Self:
+        return cls.from_json(download_json(url))

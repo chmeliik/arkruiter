@@ -7,6 +7,7 @@ authors = [
 ]
 dependencies = [
     "pydantic~=2.3",
+    "requests~=2.31",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
@@ -26,6 +27,12 @@ arkruiter = "arkruiter.main:main"
 
 [tool.pyright]
 typeCheckingMode = "strict"
+
+
+[tool.pytest.ini_options]
+markers = [
+    "network: tests that do network IO",
+]
 
 
 [tool.ruff]

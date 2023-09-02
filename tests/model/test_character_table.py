@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pytest
 from arkruiter.model.character_table import Character, CharacterTable, Profession
 
 if TYPE_CHECKING:
@@ -57,3 +58,10 @@ def test_character_table_from_json() -> None:
     }
     table = CharacterTable.from_json(table_data)
     assert table.characters == [AMIYA]
+
+
+@pytest.mark.network
+def test_character_table_from_url() -> None:
+    table = CharacterTable.from_url()
+    assert len(table.characters) >= 269
+    assert table.characters[0].name == "Lancet-2"

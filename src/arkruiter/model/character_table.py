@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import enum
 from collections.abc import Mapping, Sequence
-from typing import TYPE_CHECKING, Any, Literal, NamedTuple, Self
+from typing import TYPE_CHECKING, Any, NamedTuple, Self
 
 import pydantic
 
@@ -13,7 +13,19 @@ if TYPE_CHECKING:
 
 DEFAULT_URL = "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_US/gamedata/excel/character_table.json"
 
-Position = Literal["MELEE", "RANGED"]
+
+class Rarity(int, enum.Enum):
+    Six = 5
+    Five = 4
+    Four = 3
+    Three = 2
+    Two = 1
+    One = 0
+
+
+class Position(str, enum.Enum):
+    Melee = "MELEE"
+    Ranged = "RANGED"
 
 
 class Profession(str, enum.Enum):
@@ -29,7 +41,7 @@ class Profession(str, enum.Enum):
 
 class Character(pydantic.BaseModel):
     name: str
-    rarity: int
+    rarity: Rarity
     tags: Sequence[str] = pydantic.Field(alias="tagList")
     position: Position
     profession: Profession

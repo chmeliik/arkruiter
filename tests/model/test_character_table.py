@@ -3,16 +3,22 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-from arkruiter.model.character_table import Character, CharacterTable, Profession
+from arkruiter.model.character_table import (
+    Character,
+    CharacterTable,
+    Position,
+    Profession,
+    Rarity,
+)
 
 if TYPE_CHECKING:
     from arkruiter.types import JsonData
 
 AMIYA = Character(
     name="Amiya",
-    rarity=4,
+    rarity=Rarity.Five,
     tagList=["DPS"],
-    position="RANGED",
+    position=Position.Ranged,
     profession=Profession.Caster,
 )
 

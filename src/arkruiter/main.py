@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import logging
 import shlex
 import textwrap
 from textwrap import dedent
@@ -13,9 +12,6 @@ from arkruiter.recruitment.evaluate import try_all_combinations
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
-
-
-log = logging.getLogger(__name__)
 
 
 def main() -> None:

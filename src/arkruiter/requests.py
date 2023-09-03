@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-import logging
 from typing import TYPE_CHECKING
 
 import requests_cache
 
 if TYPE_CHECKING:
     from arkruiter.types import JsonData
-
-log = logging.getLogger(__name__)
 
 _session = requests_cache.CachedSession(
     "arkruiter",

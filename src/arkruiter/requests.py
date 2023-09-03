@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING
 
 import requests_cache
 
 if TYPE_CHECKING:
     from arkruiter.types import JsonData
+
+log = logging.getLogger(__name__)
 
 _session = requests_cache.CachedSession(
     "arkruiter",
@@ -18,6 +21,8 @@ _session = requests_cache.CachedSession(
 
 
 def download_json(url: str) -> JsonData:
+    log.debug("Getting data from %s", url)
     resp = _session.get(url, timeout=10)  # type: ignore reportUnknownMemberType
+    log.debug("Response was cached: %r", resp.from_cache)
     resp.raise_for_status()
     return resp.json()

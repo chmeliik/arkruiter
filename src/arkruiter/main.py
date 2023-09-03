@@ -1,17 +1,20 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import shlex
-import sys
 import textwrap
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal
 
 from arkruiter.game_data import GameData
+from arkruiter.logging import setup_root_logger
 from arkruiter.recruitment import try_all_combinations
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+
+log = logging.getLogger(__name__)
 
 
 def main() -> None:
@@ -23,7 +26,10 @@ def main() -> None:
         action=PrintCompletionAction,
         help="print completion for the selected shell and exit",
     )
+    ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args()
+
+    setup_root_logger("arkruiter", logging.DEBUG if args.verbose else logging.INFO)
 
     game_data = GameData()
     tags = _filter_known_tags(args.tag, game_data.recruitment_tags())
@@ -57,7 +63,7 @@ def _filter_known_tags(
         if tag in recruitment_tags:
             valid_tags.append(tag)
         else:
-            print("WARNING: unknown tag:", tag, file=sys.stderr)
+            log.warning("Unknown tag: %r", tag)
     return valid_tags
 
 

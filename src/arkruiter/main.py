@@ -6,9 +6,8 @@ import textwrap
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal
 
-from arkruiter.game_data.character_table import CharacterTable
-from arkruiter.game_data.gacha_table import GachaTable
-from arkruiter.recruitment.evaluate import try_all_combinations
+from arkruiter.game_data import GameData
+from arkruiter.recruitment import try_all_combinations
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -25,19 +24,13 @@ def main() -> None:
     )
     args = ap.parse_args()
 
-    gacha_table = GachaTable.from_url()
-    character_table = CharacterTable.from_url()
-
-    recruitable_characters = [
-        c for c in character_table.characters if gacha_table.is_recruitable(c.name)
-    ]
-
+    game_data = GameData()
     tags: list[str] = args.tag
 
     interesting_results = sorted(
         filter(
             lambda r: r.interest != 0,
-            try_all_combinations(tags, recruitable_characters),
+            try_all_combinations(tags, game_data.recruitable_characters()),
         )
     )
 
@@ -92,9 +85,4 @@ class PrintCompletionAction(argparse.Action):
         return code
 
     def _get_recruitment_tags(self) -> list[str]:
-        gacha_table = GachaTable.from_url()
-        return [
-            tag_name
-            for tag in gacha_table.gacha_tags
-            if (tag_name := tag.tag_name) not in ("Male", "Female")
-        ]
+        return GameData().recruitment_tags()

@@ -5,7 +5,7 @@ import functools
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Self
 
-from arkruiter.game_data.character_table import Character, Rarity
+from arkruiter.game_data import Character, Rarity
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

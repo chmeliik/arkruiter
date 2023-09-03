@@ -3,13 +3,11 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING
 
-from arkruiter.game_data.character_table import Rarity
+from arkruiter.game_data import Character, Rarity
 from arkruiter.recruitment.result import RecruitmentResult
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Sequence
-
-    from arkruiter.game_data.character_table import Character
 
 SIX_STAR_TAG = "Top Operator"
 FIVE_STAR_TAG = "Senior Operator"

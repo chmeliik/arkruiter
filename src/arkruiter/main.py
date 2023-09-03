@@ -3,10 +3,13 @@ from __future__ import annotations
 import argparse
 import logging
 import shlex
+import textwrap
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal
 
+from arkruiter.game_data.character_table import CharacterTable
 from arkruiter.game_data.gacha_table import GachaTable
+from arkruiter.recruitment.evaluate import try_all_combinations
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -26,8 +29,37 @@ def main() -> None:
     )
     args = ap.parse_args()
 
+    gacha_table = GachaTable.from_url()
+    character_table = CharacterTable.from_url()
+
+    recruitable_characters = [
+        c for c in character_table.characters if gacha_table.is_recruitable(c.name)
+    ]
+
     tags: list[str] = args.tag
-    print("\n".join(tags))
+
+    interesting_results = sorted(
+        filter(
+            lambda r: r.interest != 0,
+            try_all_combinations(tags, recruitable_characters),
+        )
+    )
+
+    if interesting_results:
+        for result in interesting_results:
+            print("-" * 80)
+            _print_wrapped(f"tags: {', '.join(result.selected_tags)}")
+            _print_wrapped(
+                f"characters: {', '.join(c.name for c in result.possible_characters)}"
+            )
+    else:
+        print("-" * 80)
+        print("Nothing interesting")
+    print("-" * 80)
+
+
+def _print_wrapped(text: str, width: int = 80) -> None:
+    print("\n".join(textwrap.wrap(text, width, subsequent_indent=" " * 4)))
 
 
 class PrintCompletionAction(argparse.Action):

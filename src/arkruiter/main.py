@@ -6,7 +6,7 @@ import shlex
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal
 
-from arkruiter.model.gacha_table import GachaTable
+from arkruiter.game_data.gacha_table import GachaTable
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

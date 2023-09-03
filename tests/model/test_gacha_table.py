@@ -3,7 +3,7 @@ from __future__ import annotations
 import textwrap
 
 import pytest
-from arkruiter.model.gacha_table import GachaTable
+from arkruiter.game_data.gacha_table import GachaTable
 
 
 @pytest.mark.network

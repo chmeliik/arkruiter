@@ -26,7 +26,7 @@ class RecruitmentResult:
 
     def __lt__(self, other: Self) -> bool:
         def key(r: RecruitmentResult) -> tuple[Interest, int]:
-            return r.interest, len(r.possible_characters)
+            return r.interest, -len(r.possible_characters)
 
         return key(self) < key(other)
 

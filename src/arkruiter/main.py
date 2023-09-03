@@ -31,7 +31,8 @@ def main() -> None:
         filter(
             lambda r: r.interest != 0,
             try_all_combinations(tags, game_data.recruitable_characters()),
-        )
+        ),
+        reverse=True,
     )
 
     if interesting_results:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import shlex
+import sys
 import textwrap
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal
@@ -25,7 +26,7 @@ def main() -> None:
     args = ap.parse_args()
 
     game_data = GameData()
-    tags: list[str] = args.tag
+    tags = _filter_known_tags(args.tag, game_data.recruitment_tags())
 
     interesting_results = sorted(
         filter(
@@ -46,6 +47,18 @@ def main() -> None:
         print("-" * 80)
         print("Nothing interesting")
     print("-" * 80)
+
+
+def _filter_known_tags(
+    user_tags: Sequence[str], recruitment_tags: Sequence[str]
+) -> list[str]:
+    valid_tags: list[str] = []
+    for tag in user_tags:
+        if tag in recruitment_tags:
+            valid_tags.append(tag)
+        else:
+            print("WARNING: unknown tag:", tag, file=sys.stderr)
+    return valid_tags
 
 
 def _print_wrapped(text: str, width: int = 80) -> None:

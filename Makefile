@@ -1,6 +1,6 @@
 .PHONY: venv
 venv:
-	virtualenv venv
+	if command -v virtualenv; then virtualenv venv; else python -m venv venv; fi
 	venv/bin/pip install pdm
 	venv/bin/pdm install -G dev
 

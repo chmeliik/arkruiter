@@ -32,7 +32,7 @@ def main() -> None:
     setup_root_logger("arkruiter", logging.DEBUG if args.verbose else logging.INFO)
 
     game_data = GameData()
-    tags = _filter_known_tags(args.tag, game_data.recruitment_tags())
+    tags = _validify_tags(args.tag, game_data.recruitment_tags())
 
     interesting_results = sorted(
         filter(
@@ -55,13 +55,16 @@ def main() -> None:
     print("-" * 80)
 
 
-def _filter_known_tags(
+def _validify_tags(
     user_tags: Sequence[str], recruitment_tags: Sequence[str]
 ) -> list[str]:
+    """Convert lowercase tags to their correct-case variants, drop unknown tags."""
     valid_tags: list[str] = []
+    lower_tag_to_actual_tag = {tag.lower(): tag for tag in recruitment_tags}
     for tag in user_tags:
-        if tag in recruitment_tags:
-            valid_tags.append(tag)
+        actual_tag = lower_tag_to_actual_tag.get(tag.lower())
+        if actual_tag:
+            valid_tags.append(actual_tag)
         else:
             log.warning("Unknown tag: %r", tag)
     return valid_tags

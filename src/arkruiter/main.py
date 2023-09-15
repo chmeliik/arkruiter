@@ -22,7 +22,7 @@ def main() -> None:
     ap.add_argument("tag", nargs="+", help="select a recruitment tag")
     ap.add_argument(
         "--print-completion",
-        choices=["zsh"],
+        choices=["bash", "zsh"],
         action=PrintCompletionAction,
         help="print completion for the selected shell and exit",
     )
@@ -79,18 +79,19 @@ class PrintCompletionAction(argparse.Action):
         values: str | Sequence[Any] | None,
         _option_string: str | None = None,
     ) -> None:
-        if values == "zsh":
-            code = self._completion_code("zsh")
+        shell = values
+        if shell in ("bash", "zsh"):
+            code = self._completion_code(shell)
         else:
-            parser.error(f"unknown shell: {values}")
+            parser.error(f"unknown shell: {shell}")
 
         print(code.strip())
         parser.exit(0)
 
-    def _completion_code(self, shell: Literal["zsh"]) -> str:
+    def _completion_code(self, shell: Literal["bash", "zsh"]) -> str:
         recruitment_tags = self._get_recruitment_tags()
+        quoted_tags = " ".join(map(shlex.quote, recruitment_tags))
         if shell == "zsh":
-            quoted_tags = " ".join(map(shlex.quote, recruitment_tags))
             code = dedent(
                 f"""
                 _arkruiter() {{
@@ -102,6 +103,9 @@ class PrintCompletionAction(argparse.Action):
                 compdef _arkruiter arkruiter
                 """
             )
+        elif shell == "bash":
+            double_quoted_tags = shlex.quote(quoted_tags)
+            code = f"complete -W {double_quoted_tags} arkruiter"
         return code
 
     def _get_recruitment_tags(self) -> list[str]:

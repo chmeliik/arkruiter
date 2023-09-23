@@ -5,7 +5,7 @@ import logging
 import shlex
 import textwrap
 from textwrap import dedent
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any, Literal, assert_never
 
 from arkruiter.game_data import GameData
 from arkruiter.logging import setup_root_logger
@@ -109,6 +109,8 @@ class PrintCompletionAction(argparse.Action):
         elif shell == "bash":
             double_quoted_tags = shlex.quote(quoted_tags)
             code = f"complete -W {double_quoted_tags} arkruiter"
+        else:
+            assert_never(shell)
         return code
 
     def _get_recruitment_tags(self) -> list[str]:

@@ -3,6 +3,7 @@ from __future__ import annotations
 import textwrap
 
 import pytest
+
 from arkruiter.game_data.gacha_table import GachaTable
 
 

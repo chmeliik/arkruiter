@@ -37,6 +37,7 @@ markers = [
 
 
 [tool.ruff]
+src = ["src"]
 select = [
     "F",    # pyflakes
     "W",    # pycodestyle warning

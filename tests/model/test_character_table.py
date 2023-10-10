@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
+
 from arkruiter.game_data.character_table import (
     Character,
     CharacterTable,

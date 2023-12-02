@@ -14,14 +14,14 @@ update-deps: venv
 
 .PHONY: check
 check: venv
-	venv/bin/black --check --diff .
 	venv/bin/ruff check .
+	venv/bin/ruff format --check --diff .
 	venv/bin/pyright
 
 .PHONY: autofix
 autofix: venv
-	venv/bin/black .
 	venv/bin/ruff check --fix .
+	venv/bin/ruff format .
 
 .PHONY: test
 test: venv

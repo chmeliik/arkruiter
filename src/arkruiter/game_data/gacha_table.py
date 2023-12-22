@@ -8,7 +8,7 @@ import pydantic
 
 from arkruiter.requests import download_json
 
-DEFAULT_URL = "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_US/gamedata/excel/gacha_table.json"
+DEFAULT_URL = "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData_YoStar/master/en_US/gamedata/excel/gacha_table.json"
 
 
 class Tag(pydantic.BaseModel):

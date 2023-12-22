@@ -28,7 +28,7 @@ def test_parse_character() -> None:
     character = Character.model_validate(
         {
             "name": "Amiya",
-            "rarity": 4,
+            "rarity": "TIER_5",
             "tagList": ["DPS"],
             "position": "RANGED",
             "profession": "CASTER",
@@ -47,7 +47,7 @@ def test_character_table_from_json() -> None:
             # ...
             "itemObtainApproach": "Main Story",
             # ...
-            "rarity": 4,
+            "rarity": "TIER_5",
             "profession": "CASTER",
             # ...
         },
@@ -58,7 +58,7 @@ def test_character_table_from_json() -> None:
             "tagList": ["AoE"],
             "itemObtainApproach": None,
             # ...
-            "rarity": 4,
+            "rarity": "TIER_5",
             "profession": "CASTER",
             # ...
         },

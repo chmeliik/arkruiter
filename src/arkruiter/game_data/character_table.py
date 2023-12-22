@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import enum
 from collections.abc import Mapping, Sequence
-from typing import TYPE_CHECKING, Any, NamedTuple, Self
+from typing import TYPE_CHECKING, Annotated, Any, NamedTuple, Self
 
 import pydantic
 
@@ -11,16 +11,16 @@ from arkruiter.requests import download_json
 if TYPE_CHECKING:
     from arkruiter.types import JsonData
 
-DEFAULT_URL = "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/en_US/gamedata/excel/character_table.json"
+DEFAULT_URL = "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData_YoStar/master/en_US/gamedata/excel/character_table.json"
 
 
 class Rarity(int, enum.Enum):
-    Six = 5
-    Five = 4
-    Four = 3
-    Three = 2
-    Two = 1
-    One = 0
+    Six = 6
+    Five = 5
+    Four = 4
+    Three = 3
+    Two = 2
+    One = 1
 
 
 class Position(str, enum.Enum):
@@ -41,7 +41,12 @@ class Profession(str, enum.Enum):
 
 class Character(pydantic.BaseModel):
     name: str
-    rarity: Rarity
+    rarity: Annotated[
+        Rarity,
+        pydantic.BeforeValidator(
+            lambda v: v.removeprefix("TIER_") if isinstance(v, str) else v
+        ),
+    ]
     tags: Sequence[str] = pydantic.Field(alias="tagList")
     position: Position
     profession: Profession

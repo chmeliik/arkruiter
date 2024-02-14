@@ -16,7 +16,7 @@ update-deps: venv
 check: venv
 	venv/bin/ruff check .
 	venv/bin/ruff format --check --diff .
-	venv/bin/pyright
+	source venv/bin/activate && pyright
 
 .PHONY: autofix
 autofix: venv

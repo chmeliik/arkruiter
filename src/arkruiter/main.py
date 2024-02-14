@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import logging
 import shlex
+import shutil
 import textwrap
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Literal, assert_never
@@ -42,17 +43,20 @@ def main() -> None:
         reverse=True,
     )
 
+    terminal_width, _ = shutil.get_terminal_size()
+
     if interesting_results:
         for result in interesting_results:
-            print("-" * 80)
+            print("-" * terminal_width)
             _print_wrapped(f"tags: {', '.join(result.selected_tags)}")
             _print_wrapped(
-                f"characters: {', '.join(c.name for c in result.possible_characters)}"
+                f"characters: {', '.join(c.name for c in result.possible_characters)}",
+                width=terminal_width,
             )
     else:
-        print("-" * 80)
+        print("-" * terminal_width)
         print("Nothing interesting")
-    print("-" * 80)
+    print("-" * terminal_width)
 
 
 def _validify_tags(

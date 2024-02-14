@@ -27,6 +27,7 @@ arkruiter = "arkruiter.main:main"
 
 
 [tool.pyright]
+include = ["src"]
 typeCheckingMode = "strict"
 
 

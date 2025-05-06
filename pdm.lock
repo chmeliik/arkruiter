@@ -3,15 +3,21 @@
 
 [metadata]
 groups = ["default", "dev"]
-strategy = ["cross_platform"]
-lock_version = "4.4.1"
-content_hash = "sha256:3d994e9016eb2e85a434533f5aba5abc499b576dd2403f9ddcb1a2ac248a39ff"
+strategy = []
+lock_version = "4.5.0"
+content_hash = "sha256:fe3b703099e422e630c3b4f90b953bfc002d93f41368dae78e0e747721f0070b"
+
+[[metadata.targets]]
+requires_python = ">=3.11"
 
 [[package]]
 name = "annotated-types"
 version = "0.5.0"
 requires_python = ">=3.7"
 summary = "Reusable constraint types to use with typing.Annotated"
+dependencies = [
+    "typing-extensions>=4.0.0; python_version < \"3.9\"",
+]
 files = [
     {file = "annotated_types-0.5.0-py3-none-any.whl", hash = "sha256:58da39888f92c276ad970249761ebea80ba544b77acddaa1a4d6cf78287d45fd"},
     {file = "annotated_types-0.5.0.tar.gz", hash = "sha256:47cdc3490d9ac1506ce92c7aaa76c579dc3509ff11e098fc867e5130ab7be802"},
@@ -22,6 +28,9 @@ name = "attrs"
 version = "23.1.0"
 requires_python = ">=3.7"
 summary = "Classes Without Boilerplate"
+dependencies = [
+    "importlib-metadata; python_version < \"3.8\"",
+]
 files = [
     {file = "attrs-23.1.0-py3-none-any.whl", hash = "sha256:1f28b4522cdc2fb4256ac1a020c78acf9cba2c6b461ccd2c126f3aa8e8335d04"},
     {file = "attrs-23.1.0.tar.gz", hash = "sha256:6279836d581513a26f1bf235f9acd333bc9115683f14f7e8fae46c98fc50e015"},
@@ -34,6 +43,8 @@ requires_python = ">=3.7"
 summary = "Composable complex class support for attrs and dataclasses."
 dependencies = [
     "attrs>=20",
+    "exceptiongroup; python_version < \"3.11\"",
+    "typing-extensions>=4.1.0; python_version < \"3.11\"",
 ]
 files = [
     {file = "cattrs-23.1.2-py3-none-any.whl", hash = "sha256:b2bb14311ac17bed0d58785e5a60f022e5431aca3932e3fc5cc8ed8639de50a4"},
@@ -133,6 +144,9 @@ name = "platformdirs"
 version = "3.10.0"
 requires_python = ">=3.7"
 summary = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
+dependencies = [
+    "typing-extensions>=4.7.1; python_version < \"3.8\"",
+]
 files = [
     {file = "platformdirs-3.10.0-py3-none-any.whl", hash = "sha256:d7c24979f292f916dc9cbf8648319032f551ea8c49a4c9bf2fb556a02070ec1d"},
     {file = "platformdirs-3.10.0.tar.gz", hash = "sha256:b45696dab2d7cc691a3226759c0d3b00c47c8b6e293d96f6436f733303f77f6d"},
@@ -224,6 +238,7 @@ requires_python = ">=3.7"
 summary = "Command line wrapper for pyright"
 dependencies = [
     "nodeenv>=1.6.0",
+    "typing-extensions>=3.7; python_version < \"3.8\"",
 ]
 files = [
     {file = "pyright-1.1.350-py3-none-any.whl", hash = "sha256:f1dde6bcefd3c90aedbe9dd1c573e4c1ddbca8c74bf4fa664dd3b1a599ac9a66"},
@@ -237,9 +252,12 @@ requires_python = ">=3.7"
 summary = "pytest: simple powerful testing with Python"
 dependencies = [
     "colorama; sys_platform == \"win32\"",
+    "exceptiongroup>=1.0.0rc8; python_version < \"3.11\"",
+    "importlib-metadata>=0.12; python_version < \"3.8\"",
     "iniconfig",
     "packaging",
     "pluggy<2.0,>=0.12",
+    "tomli>=1.0.0; python_version < \"3.11\"",
 ]
 files = [
     {file = "pytest-7.4.4-py3-none-any.whl", hash = "sha256:b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8"},

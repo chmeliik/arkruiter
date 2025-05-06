@@ -21,7 +21,7 @@ dependencies = [
     { name = "requests-cache" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "pyright" },
     { name = "pytest" },
@@ -31,13 +31,16 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "pydantic", specifier = "~=2.3" },
-    { name = "pyright", marker = "extra == 'dev'", specifier = "~=1.1" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = "~=7.4" },
     { name = "requests", specifier = "~=2.31" },
     { name = "requests-cache", specifier = "~=1.1" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "~=0.0" },
 ]
-provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pyright", specifier = "~=1.1" },
+    { name = "pytest", specifier = "~=7.4" },
+    { name = "ruff", specifier = "~=0.0" },
+]
 
 [[package]]
 name = "attrs"

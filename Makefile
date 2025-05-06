@@ -1,6 +1,5 @@
 define make_venv
-	uv sync --extra dev
-	uv pip install -e .
+	uv sync --group dev
 endef
 
 .venv:

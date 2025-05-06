@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from arkruiter.game_data import character_table, gacha_table
 
 __all__ = [
-    "GameData",
     "Character",
+    "GameData",
     "Rarity",
 ]
 

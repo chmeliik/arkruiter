@@ -70,8 +70,6 @@ select = [
 ]
 ignore = [
     "E501",    # line-too-long
-    "ANN101",  # missing-type-self
-    "ANN102",  # missing-type-cls
 ]
 
 [tool.ruff.lint.per-file-ignores]

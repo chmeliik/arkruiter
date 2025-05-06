@@ -44,12 +44,13 @@ def _is_recruitable_by_tags(character: Character, tags: Sequence[str]) -> bool:
 
 
 def _has_tag(character: Character, tag_name: str) -> bool:
-    return (
-        tag_name in character.tags
-        or tag_name == character.profession.name
-        or tag_name == character.position.name
-        or tag_name == _rarity_tag(character)
+    relevant_tags = (
+        *character.tags,
+        character.profession.name,
+        character.position.name,
+        _rarity_tag(character),
     )
+    return tag_name in relevant_tags
 
 
 def _rarity_tag(character: Character) -> str | None:

@@ -40,6 +40,7 @@ def test_gacha_table_from_url() -> None:
         "Shift",
         "Summon",
         "Robot",
+        "Elemental",
         "Male",
         "Female",
     ]
